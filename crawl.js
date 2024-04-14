@@ -25,11 +25,13 @@ async function crawlPage(baseURL, currentURL, pages){
             const request = await fetch(currentURL)
             if (request.status > 399) {
                 console.log(`Error: status code not valid ${request.status} on page ${currentURL}`)
+                return pages
             }
             const contentType = request.headers.get('content-type')
 
             if ( !contentType.includes('text/html')) {
                 console.log(`Non html response, content type: ${contentType} on page ${currentURL}`)
+                return pages
             }
 
             const htmlBody = await request.text()

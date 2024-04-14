@@ -1,3 +1,4 @@
+const { formatAndPrint } = require('./report')
 const {  crawlPage } = require('./crawl')
 
 async function main() {
@@ -12,9 +13,7 @@ async function main() {
     const baseURL = process.argv[2]
     console.log(`starting crawler on ${baseURL}`)
     const pages = await crawlPage(baseURL, baseURL, {})
-    for (const page of Object.entries(pages)){
-        console.log(page)
-    }
+    formatAndPrint(pages)
 }
 
 main()
